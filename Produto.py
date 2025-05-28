@@ -1,7 +1,11 @@
+from Produto_Exception import ProdutoInvalidoException
+
 class Produto:
     lista_produtos = []
 
-    def _init_(self, nome, id_produto, preco, quantidade):
+    def __init__(self, nome, id_produto, preco, quantidade):
+        if not nome or not id_produto or float(preco) < 0 or int(quantidade) < 0:
+            raise ProdutoInvalidoException("Dados do produto inválidos")
         self.nome = nome
         self.id_produto = id_produto
         self.preco = float(preco)
@@ -46,7 +50,10 @@ while True:
     opcao = input("Escolha uma opção: ")
 
     if opcao == "1":
-        Produto.cadastrar_produto()
+        try:
+            Produto.cadastrar_produto()
+        except ProdutoInvalidoException as e:
+            print(f"Erro ao cadastrar produto: {e}")
     elif opcao == "2":
         Produto.listar_produtos()
     elif opcao == "3":
