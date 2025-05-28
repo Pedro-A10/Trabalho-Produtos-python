@@ -1,5 +1,9 @@
+from Cliente_Exception import ClienteInvalidoException
+
 class Cliente:
     def __init__(self, nome, email):
+         if not nome or not email:
+            raise ClienteInvalidoException("Nome e email são obrigatórios.")
         self.nome = nome
         self.email = email
 
