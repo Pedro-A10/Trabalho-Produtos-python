@@ -32,9 +32,4 @@ class Estoque:
         else:
             for codigo, quantidade in self.produtos.items():
                 print(f"Código: {codigo} - Quantidade: {quantidade}")
-    def listar_estoque(self):
-        if not self.produtos:
-            print("Nenhum produto cadastrado no estoque.")
-        else:
-            for codigo, quantidade in self.produtos.items():
-                print(f"Código: {codigo} - Quantidade: {quantidade}")
+    
