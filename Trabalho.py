@@ -26,6 +26,8 @@ class ProdutoNaoEncontradoException(Exception):
     pass
 
 class Cliente:
+    lista_clientes = []
+
     def __init__(self, nome, email):
         try:
             if not nome or not email:
@@ -40,6 +42,38 @@ class Cliente:
             return f"Cliente: {self.nome}, Email: {self.email}"
         except Exception as e:
             print(f"Erro ao converter cliente para string: {e}")
+
+    @classmethod
+    def cadastrar_cliente(cls):
+        try:
+            nome = input("Digite o nome do cliente: ")
+            email = input("Digite o email do cliente: ")
+
+            for cliente in cls.lista_clientes:
+                if cliente.email == email:
+                    print("Cliente já cadastrado com esse email!\n")
+                    return
+
+            cliente = cls(nome, email)
+            cls.lista_clientes.append(cliente)
+            print("Cliente cadastrado com sucesso!\n")
+        except Exception as e:
+            print(f"Erro ao cadastrar cliente: {e}")
+
+    @classmethod
+    def listar_clientes(cls):
+        try:
+            if not cls.lista_clientes:
+                print("Nenhum cliente cadastrado.\n")
+                return
+
+            print("\nLista de Clientes:")
+            for c in cls.lista_clientes:
+                print(f"Nome: {c.nome}")
+                print(f"Email: {c.email}")
+                print("-" * 30)
+        except Exception as e:
+            print(f"Erro ao listar clientes: {e}")
 
 class Estoque:
     def __init__(self):
@@ -157,7 +191,9 @@ if __name__ == "__main__":
         try:
             print("1 - Cadastrar Produto")
             print("2 - Listar Produtos")
-            print("3 - Sair")
+            print("3 - Cadastrar Cliente")
+            print("4 - Listar Clientes")
+            print("5 - Sair")
             opcao = input("Escolha uma opção: ")
 
             if opcao == "1":
@@ -168,6 +204,10 @@ if __name__ == "__main__":
             elif opcao == "2":
                 Produto.listar_produtos()
             elif opcao == "3":
+                Cliente.cadastrar_cliente()
+            elif opcao == "4":
+                Cliente.listar_clientes()
+            elif opcao == "5":
                 break
             else:
                 print("Opção inválida.\n")
