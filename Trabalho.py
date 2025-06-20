@@ -180,7 +180,7 @@ class Produto:
                     print(f"Preço unitário: R${p.preco:.2f}")
                     print(f"Quantidade: {p.quantidade}")
                     print(f"Preço final com imposto: R${p.preco_com_imposto:.2f}")
-                    print("-" * 30)
+                    print("-" * 15)
                 except Exception as e:
                     print(f"Erro ao exibir produto: {e}")
         except Exception as e:
